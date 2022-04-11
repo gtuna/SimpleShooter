@@ -27,7 +27,11 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 private:
 	void MoveForward(float AxisValue);
-	// void LookUp(float AxisValue);
+	void LookUpRate(float AxisValue);
+	void LookRightRate(float AxisValue);
 	void MoveRight(float AxisValue);
 
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float RotationRate = 10.f;
 };
