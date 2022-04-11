@@ -1,3 +1,2 @@
-# ShooterAssetPack
- Simple Shooter on UE4
 # SimpleShooter
+ Simple Shooter on UE4
