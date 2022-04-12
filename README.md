@@ -1,2 +1,2 @@
 # SimpleShooter
- Simple Shooter on UE4
+ Simple Shooter is an UE4 project.
