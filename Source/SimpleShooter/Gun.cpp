@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Components/SkeletalMeshComponent.h"
+#include "DrawDebugHelpers.h"
 #include "Gun.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -20,6 +21,18 @@ AGun::AGun()
 
 void AGun::PullTrigger()
 {
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (OwnerPawn == nullptr) return;
+
+	AController* OwnerController = OwnerPawn->GetController();
+	if (OwnerController == nullptr) return;
+
+	FVector EyeLocation;
+	FRotator EyeRotation;
+	OwnerController->GetPlayerViewPoint(EyeLocation, EyeRotation);
+
+	DrawDebugCamera(GetWorld(), EyeLocation, EyeRotation, 90, 2, FColor::Red, true);
+
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
 }
 
