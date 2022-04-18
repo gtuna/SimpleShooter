@@ -21,19 +21,29 @@ AGun::AGun()
 
 void AGun::PullTrigger()
 {
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
 	if (OwnerPawn == nullptr) return;
 
 	AController* OwnerController = OwnerPawn->GetController();
 	if (OwnerController == nullptr) return;
 
-	FVector EyeLocation;
-	FRotator EyeRotation;
-	OwnerController->GetPlayerViewPoint(EyeLocation, EyeRotation);
+	FVector Location;
+	FRotator Rotation;
+	OwnerController->GetPlayerViewPoint(Location, Rotation);
 
-	DrawDebugCamera(GetWorld(), EyeLocation, EyeRotation, 90, 2, FColor::Red, true);
+//	DrawDebugCamera(GetWorld(), EyeLocation, EyeRotation, 90, 2, FColor::Red, true);
 
-	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+	FVector End = Location + Rotation.Vector() * MaxRange;
+	FHitResult HitResult;
+	bool bSuccess = GetWorld()->LineTraceSingleByChannel(HitResult, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
+
+	if (bSuccess && HitResult.bBlockingHit)
+	{
+		DrawDebugPoint(GetWorld(), HitResult.Location , 20, FColor::Red, true);
+	}
+
 }
 
 // Called when the game starts or when spawned
