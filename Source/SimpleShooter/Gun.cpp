@@ -33,7 +33,7 @@ void AGun::PullTrigger()
 	FRotator Rotation;
 	OwnerController->GetPlayerViewPoint(Location, Rotation);
 
-//	DrawDebugCamera(GetWorld(), EyeLocation, EyeRotation, 90, 2, FColor::Red, true);
+	//DrawDebugCamera(GetWorld(), EyeLocation, EyeRotation, 90, 2, FColor::Red, true);
 
 	FVector End = Location + Rotation.Vector() * MaxRange;
 	FHitResult HitResult;
@@ -41,7 +41,10 @@ void AGun::PullTrigger()
 
 	if (bSuccess && HitResult.bBlockingHit)
 	{
-		DrawDebugPoint(GetWorld(), HitResult.Location , 20, FColor::Red, true);
+		//DrawDebugPoint(GetWorld(), HitResult.Location , 20, FColor::Red, true);
+
+		FVector ShotDirection = -Rotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, HitResult.Location, ShotDirection.Rotation());
 	}
 
 }
