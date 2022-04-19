@@ -22,6 +22,9 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UFUNCTION(BlueprintPure) // or we can blueprintcallable. In blueprint, a pure node doesn't have an execution pin. allways output same rsult, alleays same effect on the program.
+	bool IsDead() const;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
