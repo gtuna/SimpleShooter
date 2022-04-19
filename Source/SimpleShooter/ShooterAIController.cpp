@@ -7,7 +7,15 @@
 void AShooterAIController::BeginPlay()
 {
     Super::BeginPlay();
+
+
+}
+
+void AShooterAIController::Tick(float DeltaTime)
+{
     APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0); //returns the first player pawn
     
-    SetFocus(PlayerPawn);
+    SetFocus(PlayerPawn); 
+    MoveToActor(PlayerPawn, 200);
+    
 }
