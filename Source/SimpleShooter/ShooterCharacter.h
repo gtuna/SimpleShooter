@@ -22,11 +22,16 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UFUNCTION(BlueprintPure) // or we can blueprintcallable. In blueprint, a pure node doesn't have an execution pin. allways output same rsult, alleays same effect on the program.
+	bool IsDead() const;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 private:
 	void MoveForward(float AxisValue);
 	void LookUpRate(float AxisValue);
@@ -37,6 +42,12 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RotationRate = 10.f;
+
+	UPROPERTY(EditDefaultsOnly)
+	float MaxHealth = 100.f;
+
+	UPROPERTY(VisibleAnywhere)
+	float Health;
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
