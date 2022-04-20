@@ -20,5 +20,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+private:
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	float AcceptanceRadius = 200;
 
 };
