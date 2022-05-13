@@ -21,7 +21,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-	float AcceptanceRadius = 200;
+	UPROPERTY(EditAnywhere, Category = "AI")
+	class UBehaviorTree* AIBehavior;
+	//float AcceptanceRadius = 200;
+
 
 };
