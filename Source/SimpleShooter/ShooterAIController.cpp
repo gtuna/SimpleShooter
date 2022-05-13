@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "ShooterAIController.h"
 
@@ -11,6 +12,11 @@ void AShooterAIController::BeginPlay()
     if (AIBehavior != nullptr)
 	{
 		RunBehaviorTree(AIBehavior);
+
+        APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0); //returns the first player pawn
+
+        GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"),
+            PlayerPawn->GetActorLocation());
 	}
 
 }
