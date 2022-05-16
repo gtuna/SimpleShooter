@@ -14,8 +14,10 @@ class SIMPLESHOOTER_API UBTTask_ClearBlackboardValue : public UBTTask_Blackboard
 {
 	GENERATED_BODY()
 
-	public:
-		UBTTask_ClearBlackboardValue();
+public:
+	UBTTask_ClearBlackboardValue();
 
-		virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+protected: 
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
 };
