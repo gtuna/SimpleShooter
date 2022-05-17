@@ -32,13 +32,15 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	void Shoot();
+
 private:
 	void MoveForward(float AxisValue);
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
 	void MoveRight(float AxisValue);
 
-	void Shoot();
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RotationRate = 10.f;

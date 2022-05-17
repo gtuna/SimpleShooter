@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "ShooterAIController.h"
 
@@ -11,6 +12,12 @@ void AShooterAIController::BeginPlay()
     if (AIBehavior != nullptr)
 	{
 		RunBehaviorTree(AIBehavior);
+
+        
+        GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"),
+            this->GetPawn()->GetActorLocation());
+
+        //auto Vec = GetBlackboardComponent()->GetValueAsVector(TEXT("PlayerLocation"));
 	}
 
 }
@@ -18,18 +25,4 @@ void AShooterAIController::BeginPlay()
 void AShooterAIController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    //APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0); //returns the first player pawn
-
-
-    //if (LineOfSightTo(PlayerPawn))
-    //{
-	   // MoveToActor(PlayerPawn, AcceptanceRadius);
-    //    SetFocus(PlayerPawn);
-    //}
-    //else
-    //{
-	   // ClearFocus(EAIFocusPriority::Gameplay);
-    //    StopMovement();
-    //}
-    
 }
