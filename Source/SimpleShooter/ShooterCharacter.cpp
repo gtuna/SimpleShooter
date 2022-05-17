@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Components/CapsuleComponent.h"
 #include "Gun.h"
 #include "ShooterCharacter.h"
 
@@ -61,6 +62,12 @@ float AShooterCharacter::TakeDamage(float Damage, struct FDamageEvent const& Dam
 
 
 	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
+
+	if (IsDead())
+	{
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 	return DamageToApply;
 }
