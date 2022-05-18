@@ -3,6 +3,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "ShooterAIController.h"
+#include "ShooterCharacter.h"
 
 
 void AShooterAIController::BeginPlay()
@@ -13,11 +14,8 @@ void AShooterAIController::BeginPlay()
 	{
 		RunBehaviorTree(AIBehavior);
 
-        
         GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"),
             this->GetPawn()->GetActorLocation());
-
-        //auto Vec = GetBlackboardComponent()->GetValueAsVector(TEXT("PlayerLocation"));
 	}
 
 }
@@ -25,4 +23,15 @@ void AShooterAIController::BeginPlay()
 void AShooterAIController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+}
+
+bool AShooterAIController::IsDead() const
+{
+    const AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(GetPawn());
+    if (ControlledCharacter)
+	{
+		return ControlledCharacter->IsDead();
+	}
+
+    return true; //if we do not have a pawn, we are dead
 }
